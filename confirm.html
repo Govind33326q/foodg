@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Confirmation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #c0cad5;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            margin-top: 50px;
+        }
+        .icon {
+            font-size: 100px;
+            color: #f1edf7;
+        }
+        .message {
+            font-size: 24px;
+            margin-top: 20px;
+        }
+        .celebration {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+        }
+        .celebration div {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: #ffc107;
+            animation: celebration 5s linear infinite;
+        }
+        @keyframes celebration {
+            from {
+                transform: translateY(0);
+                opacity: 1;
+            }
+            to {
+                transform: translateY(100vh);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="icon">🎉</div>
+        <div class="message">Thank you! Your order has been confirmed.</div>
+    </div>
+    <div class="celebration">
+        <div style="left: 10%; animation-delay: 0s;"></div>
+        <div style="left: 20%; animation-delay: 0.1s;"></div>
+        <div style="left: 30%; animation-delay: 0.2s;"></div>
+        <div style="left: 40%; animation-delay: 0.3s;"></div>
+        <div style="left: 50%; animation-delay: 0.4s;"></div>
+        <div style="left: 60%; animation-delay: 0.5s;"></div>
+        <div style="left: 70%; animation-delay: 0.6s;"></div>
+        <div style="left: 80%; animation-delay: 0.7s;"></div>
+        <div style="left: 90%; animation-delay: 0.8s;"></div>
+    </div>
+</body>
+</html>

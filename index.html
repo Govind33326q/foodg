@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login with Firebase</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+        }
+        .login-container {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+            text-align: center;
+            width: 350px;
+        }
+        h2 {
+            color: white;
+            margin-bottom: 20px;
+        }
+        input {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            outline: none;
+        }
+        input::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+        .btn {
+            width: 100%;
+            padding: 12px;
+            margin-top: 15px;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .login-btn {
+            background: #28a745;
+            color: white;
+        }
+        .register-btn {
+            background: #007bff;
+            color: white;
+        }
+        .logout-btn {
+            background: #dc3545;
+            color: white;
+            display: none;
+        }
+        .btn:hover {
+            transform: scale(1.05);
+            opacity: 0.9;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <h2>Login</h2>
+        <input type="email" id="email" placeholder="Enter Email" required>
+        <input type="password" id="password" placeholder="Enter Password" required>
+        <button class="btn login-btn" id="loginBtn">Login</button>
+        <button class="btn register-btn" id="registerBtn">Register</button>
+        <button class="btn logout-btn" id="logoutBtn">Logout</button>
+        <p id="message" style="color: yellow; margin-top: 10px;"></p>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, onAuthStateChanged } 
+        from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+        // 🔥 Replace with your Firebase config
+        const firebaseConfig = {
+             apiKey: "AIzaSyD90XlnVOGUvoHjm8kkbi_e_0fDg1fUHDk",
+    authDomain: "login-bbe63.firebaseapp.com",
+    projectId: "login-bbe63",
+    storageBucket: "login-bbe63.firebasestorage.app",
+    messagingSenderId: "456113966589",
+    appId: "1:456113966589:web:383828e6ac61dd3c3b1d94",
+    measurementId: "G-755K006D5N"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const message = document.getElementById("message");
+
+        function showMessage(text, color) {
+            message.textContent = text;
+            message.style.color = color;
+        }
+
+        // 📌 LOGIN FUNCTION
+        document.getElementById("loginBtn").addEventListener("click", function () {
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
+
+            signInWithEmailAndPassword(auth, email, password)
+                .then(() => {
+                    showMessage("✅ Login Successful", "lightgreen");
+                })
+                .catch((error) => {
+                    showMessage("❌ Login Failed: " + error.message, "red");
+                });
+        });
+
+        // 📌 REGISTER FUNCTION
+        document.getElementById("registerBtn").addEventListener("click", function () {
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
+
+            createUserWithEmailAndPassword(auth, email, password)
+                .then(() => {
+                    showMessage("✅ Registration Successful", "lightgreen");
+                })
+                .catch((error) => {
+                    showMessage("❌ Registration Failed: " + error.message, "red");
+                });
+        });
+        // 📌 SESSION BREAK FUNCTION
+        function sessionBreak() {
+            signOut(auth).then(() => {
+            showMessage("✅ Session Ended!", "orange");
+            setTimeout(() => {
+                window.location.href = "login.html"; // Redirect to login page
+            }, 2000);
+            }).catch((error) => {
+            showMessage("❌ Session End Failed: " + error.message, "red");
+            });
+        }
+        // 📌 LOGOUT FUNCTION
+        document.getElementById("logoutBtn").addEventListener("click", function () {
+            signOut(auth).then(() => {
+                showMessage("✅ Logged Out!", "orange");
+            }).catch((error) => {
+                showMessage("❌ Logout Failed: " + error.message, "red");
+            });
+        });
+
+        // 📌 Check if user is logged in
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                document.getElementById("logoutBtn").style.display = "block";
+                document.getElementById("loginBtn").style.display = "none";
+                document.getElementById("registerBtn").style.display = "none";
+                showMessage("🔒 Logged in", "yellow");
+                 // If user is already logged in, redirect them
+                 setTimeout(() => {
+                    window.location.href = "pet.html"; // Change to your target page
+                }, 2000);
+            } else {
+                document.getElementById("logoutBtn").style.display = "none";
+                document.getElementById("loginBtn").style.display = "block";
+                document.getElementById("registerBtn").style.display = "block";
+                showMessage("", "");
+            }
+        });
+    </script>
+</body>
+</html>

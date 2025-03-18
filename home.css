@@ -1,0 +1,140 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+body {
+    background-image: 
+    url('bg.jpg');
+    background-size: cover;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.container {
+    width: 80%;
+    margin: auto;
+    text-align: center;
+    padding: 20px;
+}
+.food-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+}
+.food-item {
+    background: white;
+    padding: 15px;
+    border-radius: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    align-self: unset;
+}
+.food-item img {
+    width: 100%;
+    height: 300px;
+    border-radius: 10px;
+    object-fit: cover; 
+}
+.food-item h3 {
+    margin: 10px 0;
+}
+.food-item p {
+    color: gray;
+}
+.food-item .price {
+    font-size: 18px;
+    font-weight: bold;
+    color: #ff5733;
+}
+.add-to-cart {
+    margin-top: 10px;
+    background: #045ff1;
+    color: white;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.add-to-cart:hover {
+    background: #334adc;
+}
+.cart {
+    margin-top: 30px;
+    padding: 20px;
+    background: white;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.cart h2 {
+    margin-bottom: 10px;
+}
+.cart-items {
+    list-style: none;
+    padding: 0;
+}
+.cart-items li {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+.remove-item {
+    background: red;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+.cart-total {
+    margin-top: 10px;
+    font-size: 18px;
+    font-weight: bold;
+}
+.checkout {
+    margin-top: 15px;
+    background: green;
+    color: white;
+    padding: 19px 95px;
+    border: none;
+    border-radius: 41px;
+    cursor: pointer;
+}
+
+.btn {
+    display: none;
+    padding: 10px 20px;
+    background-color: #ff0000;
+    color: white;
+    text-decoration: none;
+    border-radius: 200px;
+    border: none;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background-color: #db2a2a;
+
+}
+
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #ff0000;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background-color: #dd6060;
+}
+
+

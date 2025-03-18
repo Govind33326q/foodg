@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Page</title>
+    <link rel="stylesheet" href="qr.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            max-width: 400px;
+            margin: 12px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+        }
+        input, button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+        }
+        .qr-container {
+            text-align: center;
+            margin-top: 10px;
+        }
+        .qr-container img {
+            width: 200px;
+            height: 200px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Select Payment Method</h2> 
+   
+    <a href="home.html" class="btn">Back</a>
+
+<style>
+  .btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #fc3003;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+  }
+
+  .btn:hover {
+    background-color:#f95151;
+  }
+</style>
+
+
+
+    <div class="container">
+        <button onclick="showPage('upi')">UPI</button>
+        <button onclick="showPage('card')">Credit/Debit Card</button>
+        <button onclick="showPage('cod')">Cash on Delivery</button>
+    </div>
+
+    <div id="upi" class="container" style="display:none;">
+        <h3>Pay via UPI</h3>
+        <input type="text" id="upi-id" placeholder="Enter UPI ID">
+        <button onclick="confirmPayment('UPI')">Proceed to Pay</button>
+        <script>
+            function confirmPayment(method) {
+            const upiId = document.getElementById('upi-id').value;
+            if (upiId) {
+                window.location.href = "success.html";
+            } else {
+                alert('Please enter a valid UPI ID.');
+            }
+            }
+        </script>
+        </script>
+        <div class="qr-container">
+            <h4>Scan to Pay</h4>
+            <img src="qr.png" alt="QR Code">
+        </div>
+    </div>
+
+    <div id="card" class="container" style="display:none;">
+        <h3>Enter Card Details</h3>
+        <input type="text" placeholder="Card Number">
+        <input type="text" placeholder="Expiry Date (MM/YY)">
+        <input type="text" placeholder="CVV">
+        <button onclick="confirmPayment('Card')">Pay Now</button>
+    </div>
+
+    <div id="cod" class="container" style="display:none;">
+        <h3>Cash on Delivery</h3>
+        <p>Order will be placed with COD option.</p>
+        <button onclick="confirmPayment('COD')">Confirm Order</button> 
+        <script>
+            function confirmPayment(method) {
+            if (method === 'COD') {
+                window.location.href = 'confirm.html';
+            }
+            }
+        </script>
+    </div>
+    <script>
+        function showPage(paymentMethod) {
+            document.getElementById('upi').style.display = 'none';
+            document.getElementById('card').style.display = 'none';
+            document.getElementById('cod').style.display = 'none';
+            document.getElementById(paymentMethod).style.display = 'block';
+        }
+
+        function confirmPayment(method) {
+            if (method === 'UPI') {
+                const upiId = document.getElementById('upi-id').value;
+                if (upiId) {    
+                    window.location.href = 'success.html';
+                } else {
+                    alert('Please enter a valid UPI ID.');
+                }
+            } else if (method === 'Card') {
+                const cardNumber = document.querySelector('#card input[type="text"]:nth-child(1)').value;
+                const expiryDate = document.querySelector('#card input[type="text"]:nth-child(2)').value;
+                const cvv = document.querySelector('#card input[type="text"]:nth-child(3)').value;
+                if (cardNumber && expiryDate && cvv) {
+                    window.location.href = 'success.html';
+                } else {
+                    alert('Please enter valid card details.');
+                }
+            } else if (method === 'COD') {
+                window.location.href = "confirm.html";
+                
+            }
+        }
+    </script>
+    <script>
+        function showPage(paymentMethod) {
+            document.getElementById('upi').style.display = 'none';
+            document.getElementById('card').style.display = 'none';
+            document.getElementById('cod').style.display = 'none';
+            document.getElementById(paymentMethod).style.display = 'block';
+        }
+
+    </script>
+</body>
+</html>
